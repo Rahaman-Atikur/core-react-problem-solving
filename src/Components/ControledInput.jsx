@@ -1,5 +1,4 @@
 import { useState } from "react"
-
 export default function ControlledIn() {
     const [text, settext] = useState("");
     const handleUserInput = (e) => {
