@@ -1,29 +1,8 @@
-
-// import './App.css'
-// import './Color'
-// import Color from './Color'
-// import Reset from './Components/reset'
-// import Visibility from './Components/toggleVisibility'
-// import ControlledIn from './Components/ControledInput'
-// import ListRendering from './Components/listRendering'
-// import FunCompo from './Components/functionalComponents'
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import Username from './Components/listOfUser';
 function App() {
-  const [data, setData] = useState([]);
-  const callFromApi = async () => {
-    try {
-      const promise = await fetch('https://jsonplaceholder.typicode.com/users');
-      const jsonData = await promise.json();
-      setData(jsonData);
-    }
-    catch{
-      console.error("Error Fetching data");
-    }
-  }
-  const displayData = () => {
-    console.log(data);
-  }
+  const promiseFromApi = fetch("https://jsonplaceholder.typicode.com/users")
+    .then((res) => res.json()).then((data)=>console.log(data));
 
   return (
     <>
@@ -34,11 +13,10 @@ function App() {
       {/* <ListRendering></ListRendering> */}
       {/* <FunCompo></FunCompo> */}
       {/* <Username></Username> */}
-      {
-        data.map((user)=>
-        <li>{user.name}</li>
-        )
-      }
+      <Suspense fallback={<h2>Loading..</h2>}>
+        <Username data={data} ></Username>
+    </Suspense >
+
 
     </>
   )
