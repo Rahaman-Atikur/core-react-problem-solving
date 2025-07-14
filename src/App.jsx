@@ -1,24 +1,18 @@
-import { Suspense, useState } from 'react';
-import Username from './Components/listOfUser';
-function App() {
-  const promiseFromApi = fetch("https://jsonplaceholder.typicode.com/users")
-    .then((res) => res.json()).then((data)=>console.log(data));
+import React, { Suspense } from 'react';
+import Display from './Components/display';
 
+const promiseFromApi = fetch('https://jsonplaceholder.typicode.com/users')
+  .then(res => res.json());
+
+const App = () => {
   return (
-    <>
-      {/* <Color></Color> */}
-      {/* <Reset></Reset> */}
-      {/* <Visibility></Visibility> */}
-      {/* <ControlledIn></ControlledIn> */}
-      {/* <ListRendering></ListRendering> */}
-      {/* <FunCompo></FunCompo> */}
-      {/* <Username></Username> */}
+    <div>
       <Suspense fallback={<h2>Loading..</h2>}>
-        <Username data={data} ></Username>
-    </Suspense >
+        <Display promiseFromApi={promiseFromApi}></Display>
+      </Suspense>
 
+    </div>
+  );
+};
 
-    </>
-  )
-}
-export default App
+export default App;
