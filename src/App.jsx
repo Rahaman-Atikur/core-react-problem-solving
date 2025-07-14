@@ -9,11 +9,12 @@ const promiseFromApi = fetch('https://jsonplaceholder.typicode.com/users')
 const App = () => {
   return (
     <div>
+      <Counter></Counter>
       <Suspense fallback={<h2>Loading..</h2>}>
         <Display promiseFromApi={promiseFromApi}></Display>
       </Suspense>
     <Theme></Theme>
-    <TodoList></TodoList>
+    {/* <TodoList></TodoList> */}
     </div>
   );
 };
